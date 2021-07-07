@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Skripsi</string>
+    <string name="tfe_od_app_name" translation_description="Object Detection demo app [CHAR_LIMIT=40]">Skripsi</string>
+    <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]">This device doesn\'t support Camera2 API.</string>
+    <string name="home">Home</string>
+    <string name="scan">Scan</string>
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="logout">Logout</string>
+    <string name="camera">Camera</string>
+    <string name="greeting">Selemat Pagi, %s!</string>
+    <string name="developer_info">Developer Info</string>
+</resources>

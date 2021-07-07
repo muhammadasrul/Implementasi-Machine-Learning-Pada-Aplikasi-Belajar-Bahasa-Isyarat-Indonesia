@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "47971274654",
+    "project_id": "bisindo-11e09",
+    "storage_bucket": "bisindo-11e09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47971274654:android:dba34c4f73312e397f908f",
+        "android_client_info": {
+          "package_name": "com.asrul.skripsi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47971274654-d081u2mgj8gf573phtqkn97074p0mn1m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asrul.skripsi",
+            "certificate_hash": "24b9760782423d1182c4cc8e7b5235e67a139054"
+          }
+        },
+        {
+          "client_id": "47971274654-al32qqfe1iap0dmup20u62b9rmoilqco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4HxIharFdFZIx3qs3ygNpHakdct0Z7vE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47971274654-al32qqfe1iap0dmup20u62b9rmoilqco.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
