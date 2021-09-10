@@ -146,6 +146,17 @@
             app:layout_constraintStart_toStartOf="@id/cvRegisterForm"
             app:layout_constraintTop_toBottomOf="@+id/cvRegisterForm"/>
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:elevation="10dp"
+            app:layout_constraintTop_toTopOf="@id/btnRegister"
+            app:layout_constraintStart_toStartOf="@id/btnRegister"
+            app:layout_constraintEnd_toEndOf="@id/btnRegister"
+            app:layout_constraintBottom_toBottomOf="@id/btnRegister"/>
+
         <Button
             android:id="@+id/btnLogin"
             style="@style/Widget.MaterialComponents.Button.TextButton"

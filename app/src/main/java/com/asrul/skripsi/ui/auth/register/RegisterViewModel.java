@@ -13,15 +13,20 @@ public class RegisterViewModel extends ViewModel {
     private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     private MutableLiveData<ResponseState<String>> registerStatus;
-    public LiveData<ResponseState<String>> registerWithEmail(String name, String email, String password) {
+    public LiveData<ResponseState<String>> registerStatus() {
         if (registerStatus == null) {
             registerStatus = new MutableLiveData<>();
-            registerFlow(name, email, password);
         }
         return registerStatus;
     }
 
-    private void registerFlow(String name, String email, String password) {
+    private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    public LiveData<Boolean> isLoading() {
+        return isLoading;
+    }
+
+    public void registerFlow(String name, String email, String password) {
+        isLoading.postValue(true);
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -35,10 +40,11 @@ public class RegisterViewModel extends ViewModel {
                         }
                         firebaseAuth.signOut();
 
-                        registerStatus.postValue(new ResponseState<String>().success("Success"));
+                        registerStatus.postValue(new ResponseState<String>().success("Register berhasil, silahkan Login dengan email!"));
                     } else {
                         registerStatus.postValue(new ResponseState<String>().failure(task.getException().getMessage()));
                     }
+                    isLoading.postValue(false);
                 });
     }
 }

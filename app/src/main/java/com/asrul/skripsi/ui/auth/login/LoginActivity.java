@@ -2,8 +2,9 @@ package com.asrul.skripsi.ui.auth.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnToRegister, btnLogin, btnLoginWithGoogle;
     private LoginViewModel viewModel;
     private TextInputEditText edtEmail, edtPassword;
+    private ProgressBar progressBar;
 
     private static final int SIGN_IN_RESULT_CODE = 101;
 
@@ -45,7 +47,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnLoginWithGoogle = findViewById(R.id.btnLoginWithGoogle);
 
+        progressBar = findViewById(R.id.progressBar);
+
         isLoggedIn();
+        observeIsLoading();
 
         btnLogin.setOnClickListener(view -> {
 
@@ -64,12 +69,14 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            loginWithEmailFlow(email, password);
+            viewModel.loginWithEmailFlow(email, password);
         });
 
         btnLoginWithGoogle.setOnClickListener(view -> {
             loginWithGoogleFlow();
         });
+
+        observeLoginWithEmailStatus();
 
         btnToRegister.setOnClickListener(view -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
@@ -77,16 +84,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void isLoggedIn() {
-        viewModel.isLoggedIn().observe(this, aBoolean -> {
-            if (aBoolean) {
+        viewModel.isLoggedIn().observe(this, isLoggedIn -> {
+            if (isLoggedIn) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }
         });
     }
 
-    private void loginWithEmailFlow(String email, String password) {
-        viewModel.loginWithEmail(email, password).observe(this, stringResponseState -> {
+    private void observeLoginWithEmailStatus() {
+        viewModel.loginStatus().observe(this, stringResponseState -> {
             switch (stringResponseState.getStatus()) {
                 case SUCCESS:
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -95,6 +102,16 @@ public class LoginActivity extends AppCompatActivity {
                 case FAILURE:
                     Toast.makeText(LoginActivity.this, stringResponseState.getMessage(), Toast.LENGTH_SHORT).show();
                     break;
+            }
+        });
+    }
+
+    private void observeIsLoading() {
+        viewModel.isLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                progressBar.setVisibility(View.VISIBLE);
+            } else {
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -119,26 +136,12 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if (account != null) {
-                    observeLoginWithGoogle(account);
+                    AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                    viewModel.loginWithGoogleFlow(credential);
                 }
             } catch (ApiException e) {
                 Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    private void observeLoginWithGoogle(GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        viewModel.loginWithGoogle(credential).observe(this, stringResponseState -> {
-            switch (stringResponseState.getStatus()) {
-                case SUCCESS:
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
-                    break;
-                case FAILURE:
-                    Toast.makeText(LoginActivity.this, stringResponseState.getMessage(), Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        });
     }
 }

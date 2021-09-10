@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModel;
 import com.asrul.skripsi.utils.ResponseState;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginViewModel extends ViewModel {
     private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     private MutableLiveData<Boolean> isLoggedIn;
+
     public LiveData<Boolean> isLoggedIn() {
         if (isLoggedIn == null) {
             isLoggedIn = new MutableLiveData<>();
@@ -21,44 +21,44 @@ public class LoginViewModel extends ViewModel {
         return isLoggedIn;
     }
 
-    private MutableLiveData<ResponseState<String>> loginWithEmailStatus;
-    public LiveData<ResponseState<String>> loginWithEmail(String email, String password) {
-        if (loginWithEmailStatus == null) {
-            loginWithEmailStatus = new MutableLiveData<>();
-            loginWithEmailFlow(email, password);
-        }
-        return loginWithEmailStatus;
+    private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+
+    public LiveData<Boolean> isLoading() {
+        return isLoading;
     }
 
-    private MutableLiveData<ResponseState<String>> loginWithGoogleStatus;
+    private MutableLiveData<ResponseState<String>> loginStatus;
 
-    public LiveData<ResponseState<String>> loginWithGoogle(AuthCredential credential) {
-        if (loginWithGoogleStatus == null) {
-            loginWithGoogleStatus = new MutableLiveData<>();
-            loginWithGoogleFlow(credential);
+    public LiveData<ResponseState<String>> loginStatus() {
+        if (loginStatus == null) {
+            loginStatus = new MutableLiveData<>();
         }
-        return loginWithGoogleStatus;
+        return loginStatus;
     }
 
-    private void loginWithEmailFlow(String email, String password) {
+    public void loginWithEmailFlow(String email, String password) {
+        isLoading.postValue(true);
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        loginWithEmailStatus.postValue(new ResponseState<String>().success("Login success"));
+                        loginStatus.postValue(new ResponseState<String>().success("Login success"));
                     } else {
-                        loginWithEmailStatus.postValue(new ResponseState<String>().failure("Login Failed: " + task.getException()));
+                        loginStatus.postValue(new ResponseState<String>().failure("Login Failed: " + task.getException()));
                     }
+                    isLoading.postValue(false);
                 });
     }
 
-    private void loginWithGoogleFlow(AuthCredential credential) {
+    public void loginWithGoogleFlow(AuthCredential credential) {
+        isLoading.postValue(true);
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        loginWithGoogleStatus.postValue(new ResponseState<String>().success("Login with Google success"));
+                        loginStatus.postValue(new ResponseState<String>().success("Login with Google success"));
                     } else {
-                        loginWithGoogleStatus.postValue(new ResponseState<String>().failure("Login with Google failed"));
+                        loginStatus.postValue(new ResponseState<String>().failure("Login with Google failed"));
                     }
+                    isLoading.postValue(false);
                 });
     }
 }
