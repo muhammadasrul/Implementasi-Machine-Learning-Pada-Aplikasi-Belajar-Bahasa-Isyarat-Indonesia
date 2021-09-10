@@ -10,16 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asrul.skripsi.R;
-import com.asrul.skripsi.data.newsapiresponse.ArticlesItem;
+import com.asrul.skripsi.data.News;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
-    private List<ArticlesItem> newsList;
+    private List<News> newsList;
 
-    public void setNews(List<ArticlesItem> list) {
+    public void setNews(List<News> list) {
         if (newsList == null) {
             newsList = list;
         }
@@ -34,14 +34,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        ArticlesItem news = newsList.get(position);
+        News news = newsList.get(position);
 
         holder.tvNewsTitle.setText(news.getTitle());
         holder.tvNewsDesc.setText(news.getContent());
+        holder.tvNewsWriter.setText(news.getWriter());
         Glide.with(holder.itemView)
-                .load(news.getUrlToImage())
+                .load(news.getImgUrl())
                 .into(holder.imgNews);
-
     }
 
     @Override
@@ -52,7 +52,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgNews;
-        TextView tvNewsTitle, tvNewsDesc;
+        TextView tvNewsTitle, tvNewsDesc, tvNewsWriter;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +60,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             imgNews = itemView.findViewById(R.id.imgNews);
             tvNewsTitle = itemView.findViewById(R.id.tvNewsTitle);
             tvNewsDesc = itemView.findViewById(R.id.tvNewsDesc);
+            tvNewsWriter = itemView.findViewById(R.id.tvNewsWriter);
         }
     }
 }

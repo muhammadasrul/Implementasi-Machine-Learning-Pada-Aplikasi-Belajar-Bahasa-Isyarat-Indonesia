@@ -31,7 +31,6 @@ public class ProfileFragment extends Fragment {
 
     TextView tvName, tvEmail;
     ImageView imgProfile;
-    AppCompatButton btnEditProfile, btnAbout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,8 +46,6 @@ public class ProfileFragment extends Fragment {
         tvName = view.findViewById(R.id.tvName);
         tvEmail = view.findViewById(R.id.tvEmail);
         imgProfile = view.findViewById(R.id.imgProfile);
-        btnAbout = view.findViewById(R.id.btnAbout);
-        btnEditProfile = view.findViewById(R.id.btnEditProfile);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();

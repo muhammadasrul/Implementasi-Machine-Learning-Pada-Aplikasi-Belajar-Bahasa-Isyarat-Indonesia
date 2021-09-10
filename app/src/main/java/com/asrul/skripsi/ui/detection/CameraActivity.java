@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Trace;
+import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.View;
@@ -91,6 +92,7 @@ public abstract class CameraActivity extends AppCompatActivity
   protected ImageView bottomSheetArrowImageView;
   private ImageView plusImageView, minusImageView;
   private SwitchCompat apiSwitchCompat;
+  private SwitchCompat modelSwitchCompat;
   private TextView threadsTextView;
 
   @Override
@@ -114,10 +116,19 @@ public abstract class CameraActivity extends AppCompatActivity
     plusImageView = findViewById(R.id.plus);
     minusImageView = findViewById(R.id.minus);
     apiSwitchCompat = findViewById(R.id.api_info_switch);
+    modelSwitchCompat = findViewById(R.id.model_switch);
     bottomSheetLayout = findViewById(R.id.bottom_sheet_layout);
     gestureLayout = findViewById(R.id.gesture_layout);
     sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
     bottomSheetArrowImageView = findViewById(R.id.bottom_sheet_arrow);
+
+    modelSwitchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        setUseKata(isChecked);
+        Toast.makeText(CameraActivity.this, "Deketksi per kata aktif!", Toast.LENGTH_SHORT).show();
+      }
+    });
 
     ViewTreeObserver vto = gestureLayout.getViewTreeObserver();
     vto.addOnGlobalLayoutListener(
@@ -559,4 +570,6 @@ public abstract class CameraActivity extends AppCompatActivity
   protected abstract void setNumThreads(int numThreads);
 
   protected abstract void setUseNNAPI(boolean isChecked);
+
+  protected abstract void setUseKata(boolean isChecked);
 }

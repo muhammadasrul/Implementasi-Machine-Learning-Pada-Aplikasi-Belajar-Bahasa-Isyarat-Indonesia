@@ -7,4 +7,6 @@
     <color name="tfe_semi_transparent">#661E0539</color>
 
     <color name="color_primary">#1E0539</color>
+    <color name="color_background">#61169C</color>
+    <color name="color_yellow">#FDC300</color>
 </resources>

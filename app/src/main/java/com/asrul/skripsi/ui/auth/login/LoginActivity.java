@@ -20,10 +20,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btnToRegister, btnLogin, btnForgetPassword, btnLoginWithGoogle;
+    Button btnToRegister, btnLogin, btnLoginWithGoogle;
     private LoginViewModel viewModel;
     private TextInputEditText edtEmail, edtPassword;
 
@@ -41,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
 
         btnToRegister = findViewById(R.id.btnRegister);
         btnLogin = findViewById(R.id.btnLogin);
-        btnForgetPassword = findViewById(R.id.btnForgetPassword);
         btnLoginWithGoogle = findViewById(R.id.btnLoginWithGoogle);
 
         isLoggedIn();
@@ -68,10 +69,6 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLoginWithGoogle.setOnClickListener(view -> {
             loginWithGoogleFlow();
-        });
-
-        btnForgetPassword.setOnClickListener(view -> {
-            Toast.makeText(LoginActivity.this, "Not implemented yet!", Toast.LENGTH_SHORT).show();
         });
 
         btnToRegister.setOnClickListener(view -> {
@@ -122,19 +119,17 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if (account != null) {
-                    Log.e("GoogleSignIn", account.getDisplayName());
                     observeLoginWithGoogle(account);
                 }
             } catch (ApiException e) {
-                e.printStackTrace();
                 Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("GoogleSignInFailed", e.getLocalizedMessage());
             }
         }
     }
 
     private void observeLoginWithGoogle(GoogleSignInAccount account) {
-        viewModel.loginWithGoogle(account.getIdToken()).observe(this, stringResponseState -> {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        viewModel.loginWithGoogle(credential).observe(this, stringResponseState -> {
             switch (stringResponseState.getStatus()) {
                 case SUCCESS:
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));

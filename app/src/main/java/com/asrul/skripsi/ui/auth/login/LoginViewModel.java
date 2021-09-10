@@ -31,10 +31,11 @@ public class LoginViewModel extends ViewModel {
     }
 
     private MutableLiveData<ResponseState<String>> loginWithGoogleStatus;
-    public LiveData<ResponseState<String>> loginWithGoogle(String idToken) {
+
+    public LiveData<ResponseState<String>> loginWithGoogle(AuthCredential credential) {
         if (loginWithGoogleStatus == null) {
             loginWithGoogleStatus = new MutableLiveData<>();
-            loginWithGoogleFlow(idToken);
+            loginWithGoogleFlow(credential);
         }
         return loginWithGoogleStatus;
     }
@@ -50,8 +51,7 @@ public class LoginViewModel extends ViewModel {
                 });
     }
 
-    private void loginWithGoogleFlow(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+    private void loginWithGoogleFlow(AuthCredential credential) {
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

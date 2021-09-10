@@ -54,9 +54,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     private static final int TF_OD_API_INPUT_SIZE = 416;
     private static final boolean TF_OD_API_IS_QUANTIZED = false;
-    private static final String TF_OD_API_MODEL_FILE = "custom-416.tflite";
+    private static String TF_OD_API_MODEL_FILE = "custom-416.tflite";
 
-    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/custom.txt";
+    private static String TF_OD_API_LABELS_FILE = "file:///android_asset/custom.txt";
 
     private static final DetectorMode MODE = DetectorMode.TF_OD_API;
     private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
@@ -256,5 +256,29 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     @Override
     protected void setNumThreads(final int numThreads) {
         runInBackground(() -> detector.setNumThreads(numThreads));
+    }
+
+    @Override
+    protected void setUseKata(boolean isChecked) {
+        runInBackground(() -> {
+            TF_OD_API_LABELS_FILE = "file:///android_asset/custom_kata.txt";
+            TF_OD_API_MODEL_FILE = "custom-416.tflite";
+            try {
+                detector =
+                        YoloV4Classifier.create(
+                                getAssets(),
+                                TF_OD_API_MODEL_FILE,
+                                TF_OD_API_LABELS_FILE,
+                                TF_OD_API_IS_QUANTIZED);
+            } catch (final IOException e) {
+                e.printStackTrace();
+                LOGGER.e(e, "Exception initializing classifier!");
+                Toast toast =
+                        Toast.makeText(
+                                getApplicationContext(), "Classifier could not be initialized", Toast.LENGTH_SHORT);
+                toast.show();
+                finish();
+            }
+        });
     }
 }

@@ -165,6 +165,16 @@
         android:layout_marginTop="10dp"
         android:background="@android:color/darker_gray" />
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/model_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:checked="false"
+        android:gravity="right"
+        android:text="Deteksi Kata"
+        android:textColor="@android:color/black" />
+
     <!-- TODO(b/112541284): Unhide when new NNAPI delegate is used. -->
     <LinearLayout
         android:layout_width="match_parent"

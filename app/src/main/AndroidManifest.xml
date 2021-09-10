@@ -16,27 +16,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Skripsi"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.home.alphabet.AlphabetActivity"
+            android:exported="true" />
         <activity android:name=".ui.home.word.WordActivity" />
         <activity android:name=".ui.auth.login.LoginActivity" />
         <activity android:name=".ui.auth.register.RegisterActivity" />
         <activity android:name=".ui.SplashScreenActivity">
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.detection.DetectorActivity"
             android:label="@string/tfe_od_app_name"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.MainActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 

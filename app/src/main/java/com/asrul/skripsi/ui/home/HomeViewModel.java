@@ -2,55 +2,68 @@ package com.asrul.skripsi.ui.home;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.asrul.skripsi.data.ApiConfig;
-import com.asrul.skripsi.data.newsapiresponse.ArticlesItem;
-import com.asrul.skripsi.data.newsapiresponse.NewsApiResponse;
-import com.google.firebase.auth.FirebaseAuth;
+import com.asrul.skripsi.data.News;
+import com.asrul.skripsi.utils.EspressoIdlingResource;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<List<ArticlesItem>> newsApiList;
-    public LiveData<List<ArticlesItem>> getNewsApi() {
-        if (newsApiList == null) {
-            newsApiList = new MutableLiveData<>();
-            loadNewsApiList();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://bisindo-11e09-default-rtdb.asia-southeast1.firebasedatabase.app/");
+
+    private MutableLiveData<List<News>> _newsList;
+
+    public LiveData<List<News>> getNews() {
+        if (_newsList == null) {
+            _newsList = new MutableLiveData<>();
+            loadNewsFromFirebaseDB();
         }
-        return newsApiList;
+        return _newsList;
     }
 
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+
     public LiveData<Boolean> isLoading() {
         return isLoading;
     }
 
-    private void loadNewsApiList() {
-        isLoading.setValue(true);
-        ApiConfig.getNewsApi().getNewsApi().enqueue(new Callback<NewsApiResponse>() {
-            @Override
-            public void onResponse(Call<NewsApiResponse> call, Response<NewsApiResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    newsApiList.postValue(response.body().getArticles());
-                } else {
-                    Log.e("onResponse", "onResponse: "+ response.message());
-                }
-                isLoading.setValue(false);
-            }
+    private void loadNewsFromFirebaseDB() {
+        ArrayList<News> newsList = new ArrayList<>();
 
-            @Override
-            public void onFailure(Call<NewsApiResponse> call, Throwable t) {
-                Log.e("OnFailure", "onFailure: "+ t.getMessage());
-                isLoading.setValue(false);
-            }
-        });
+        isLoading.postValue(true);
+        EspressoIdlingResource.increment();
+        database.getReference()
+                .child("news")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        newsList.clear();
+                        for (DataSnapshot keyNode : snapshot.getChildren()) {
+                            News news = keyNode.getValue(News.class);
+                            newsList.add(news);
+                        }
+                        _newsList.postValue(newsList);
+                        isLoading.postValue(false);
+                        EspressoIdlingResource.decrement();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("NEWSDATA", "Failed to read value.", error.toException());
+                        isLoading.postValue(false);
+                        EspressoIdlingResource.decrement();
+                    }
+                });
+
     }
 }

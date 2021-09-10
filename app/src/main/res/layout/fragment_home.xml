@@ -36,37 +36,49 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         app:cardBackgroundColor="@color/color_primary"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="12dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintTop_toBottomOf="@id/tvGreeting">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:layout_height="wrap_content">
 
-            <TextView
+            <ImageView
+                android:id="@+id/img_bg_banner"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/banner_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_fb_banner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="👌"
-                android:textColor="@android:color/white"
-                android:textSize="32sp" />
+                android:src="@drawable/banner_fg"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/img_fb_banner"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/poppins_medium"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:text="Belajar Bahasa Isyarat menjadi lebih mudah"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -123,27 +135,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnAlphabet" />
 
-    <TextView
-        android:id="@+id/tvBeritaLengkap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:drawableEnd="@drawable/ic_arrow_right"
-        android:drawablePadding="8dp"
-        android:text="Lebih lengkap"
-        android:textColor="@color/color_primary"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/tvBerita"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvBerita" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBerita"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvBerita"
         tools:listitem="@layout/news_item" />
 
