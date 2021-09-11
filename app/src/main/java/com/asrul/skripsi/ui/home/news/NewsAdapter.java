@@ -1,5 +1,7 @@
-package com.asrul.skripsi.ui.home;
+package com.asrul.skripsi.ui.home.news;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +37,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         News news = newsList.get(position);
+        Context context = holder.itemView.getContext();
 
         holder.tvNewsTitle.setText(news.getTitle());
         holder.tvNewsDesc.setText(news.getContent());
-        holder.tvNewsWriter.setText(news.getWriter());
-        Glide.with(holder.itemView)
+        holder.tvNewsWriter.setText(String.format("oleh: %s", news.getWriter()));
+        Glide.with(context)
                 .load(news.getImgUrl())
                 .into(holder.imgNews);
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, NewsWebViewActivity.class);
+            intent.putExtra(NewsWebViewActivity.URL_EXTRA, news.getSource());
+            context.startActivity(intent);
+        });
     }
 
     @Override

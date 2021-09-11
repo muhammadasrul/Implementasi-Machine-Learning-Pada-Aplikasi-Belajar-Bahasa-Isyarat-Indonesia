@@ -72,9 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             viewModel.loginWithEmailFlow(email, password);
         });
 
-        btnLoginWithGoogle.setOnClickListener(view -> {
-            loginWithGoogleFlow();
-        });
+        btnLoginWithGoogle.setOnClickListener(view -> loginWithGoogleFlow());
 
         observeLoginWithEmailStatus();
 

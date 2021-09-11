@@ -36,7 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
         Button btnRegister = findViewById(R.id.btnRegister);
 
         btnToLogin.setOnClickListener(view -> {
-            onBackPressed();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         });
 
         btnRegister.setOnClickListener(view -> {

@@ -10,9 +10,11 @@
         <entry key="app/src/main/res/layout/activity_alphabet.xml" value="0.28306159420289856" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_news_web_view.xml" value="0.2694746376811594" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.17401215805471124" />
         <entry key="app/src/main/res/layout/activity_word.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/empty_state.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="app/src/main/res/layout/news_item.xml" value="0.33" />

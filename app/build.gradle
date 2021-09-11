@@ -32,6 +32,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
@@ -57,4 +60,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation "com.google.gms:google-services:4.3.10"
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
+
+    implementation 'com.airbnb.android:lottie:4.1.0'
+
+    testImplementation "com.google.truth:truth:1.1.3"
 }

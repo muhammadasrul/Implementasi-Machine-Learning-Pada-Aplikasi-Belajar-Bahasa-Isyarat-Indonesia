@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.asrul.skripsi.utils.EspressoIdlingResource;
 import com.asrul.skripsi.utils.ResponseState;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -13,6 +14,7 @@ public class RegisterViewModel extends ViewModel {
     private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     private MutableLiveData<ResponseState<String>> registerStatus;
+
     public LiveData<ResponseState<String>> registerStatus() {
         if (registerStatus == null) {
             registerStatus = new MutableLiveData<>();
@@ -21,12 +23,14 @@ public class RegisterViewModel extends ViewModel {
     }
 
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+
     public LiveData<Boolean> isLoading() {
         return isLoading;
     }
 
     public void registerFlow(String name, String email, String password) {
         isLoading.postValue(true);
+        EspressoIdlingResource.increment();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -44,6 +48,7 @@ public class RegisterViewModel extends ViewModel {
                     } else {
                         registerStatus.postValue(new ResponseState<String>().failure(task.getException().getMessage()));
                     }
+                    EspressoIdlingResource.decrement();
                     isLoading.postValue(false);
                 });
     }

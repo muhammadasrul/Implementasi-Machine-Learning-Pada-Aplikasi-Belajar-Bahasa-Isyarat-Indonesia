@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.asrul.skripsi.R;
 import com.asrul.skripsi.ui.home.alphabet.AlphabetActivity;
+import com.asrul.skripsi.ui.home.news.NewsAdapter;
 import com.asrul.skripsi.ui.home.word.WordActivity;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +36,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvNews;
     private NewsAdapter newsAdapter;
     private ProgressBar progressBar;
+    private LinearLayout linearLayout;
+    private TextView tvError;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +56,9 @@ public class HomeFragment extends Fragment {
         Button btnWord = view.findViewById(R.id.btnWord);
         Button btnAlphabet = view.findViewById(R.id.btnAlphabet);
         ImageView imgProfile = view.findViewById(R.id.imgProfile);
+        tvError = view.findViewById(R.id.tvError);
+        linearLayout = view.findViewById(R.id.emptyState);
+        linearLayout.setVisibility(View.GONE);
 
         btnAlphabet.setOnClickListener(v -> {
             startActivity(new Intent(requireContext(), AlphabetActivity.class));
@@ -74,8 +81,7 @@ public class HomeFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         newsAdapter = new NewsAdapter();
 
-        observeNews();
-        observeLoading();
+        observeConnectionState();
     }
 
     private void observeNews() {
@@ -94,6 +100,21 @@ public class HomeFragment extends Fragment {
             } else {
                 progressBar.setVisibility(View.GONE);
             }
+        });
+    }
+
+    private void observeConnectionState() {
+        viewModel.isConnected().observe(getViewLifecycleOwner(), isConnected -> {
+            if (isConnected) {
+                linearLayout.setVisibility(View.GONE);
+                rvNews.setVisibility(View.VISIBLE);
+            } else {
+                linearLayout.setVisibility(View.VISIBLE);
+                rvNews.setVisibility(View.GONE);
+                tvError.setText("Tidak ada koneksi internet!");
+            }
+            observeLoading();
+            observeNews();
         });
     }
 }

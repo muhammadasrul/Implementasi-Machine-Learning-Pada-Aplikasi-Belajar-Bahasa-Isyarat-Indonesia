@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Skripsi"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.home.news.NewsWebViewActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.home.alphabet.AlphabetActivity"
             android:exported="true" />
         <activity android:name=".ui.home.word.WordActivity" />

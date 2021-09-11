@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".4" />
+        app:layout_constraintGuide_percent=".37" />
 
     <View
         android:layout_width="wrap_content"
@@ -26,8 +26,8 @@
         android:id="@+id/imgProfile"
         android:layout_width="124dp"
         android:layout_height="124dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/ic_default_profile"
-        app:layout_constraintBottom_toTopOf="@id/tvName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,21 +42,20 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/tvEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgProfile"
         tools:text="Muhammad Asrul Aji Pangestu" />
 
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
         tools:text="asrulajipangestu@gmail.com" />
 
     <androidx.cardview.widget.CardView
@@ -64,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="42dp"
         android:layout_marginEnd="24dp"
         android:orientation="vertical"
         app:cardCornerRadius="18dp"
@@ -83,19 +82,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
                 android:fontFamily="@font/poppins"
                 android:text="Tentang Developer"
-                android:textSize="10sp"
-                android:layout_marginBottom="18dp"
-                android:textColor="@color/color_primary" />
+                android:textColor="@color/color_primary"
+                android:textSize="11sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Muhammad Asrul Aji Pangestu"
-                android:textColor="@color/color_primary" />
+                android:textColor="@color/color_primary"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -140,7 +139,8 @@
         app:layout_constraintBottom_toTopOf="@+id/tvVersion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvProfile" />
+        app:layout_constraintTop_toBottomOf="@id/cvProfile"
+        app:layout_constraintVertical_bias="0.779" />
 
     <TextView
         android:id="@+id/tvVersion"
@@ -148,6 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="52dp"
         android:text="v1.0.0"
+        android:textSize="11sp"
         android:textColor="@color/color_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

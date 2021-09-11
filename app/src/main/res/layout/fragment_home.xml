@@ -21,12 +21,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:fontFamily="@font/poppins_medium"
-        tools:text="@string/greeting"
         android:textColor="@color/color_primary"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/imgProfile"
         app:layout_constraintStart_toEndOf="@id/imgProfile"
-        app:layout_constraintTop_toTopOf="@+id/imgProfile" />
+        app:layout_constraintTop_toTopOf="@+id/imgProfile"
+        tools:text="@string/greeting" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvDashboard"
@@ -50,34 +50,34 @@
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/banner_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/img_fb_banner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/banner_fg"
                 android:layout_marginTop="24dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/banner_fg"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@+id/img_fb_banner"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/poppins_medium"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:text="Belajar Bahasa Isyarat menjadi lebih mudah"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_fb_banner"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -95,6 +95,7 @@
 
     <Button
         android:id="@+id/btnAlphabet"
+        style="@style/CustomButtonSecondary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -103,20 +104,19 @@
         android:padding="24dp"
         android:text="Alphabet"
         android:textSize="18sp"
-        style="@style/CustomButtonSecondary"
         app:layout_constraintEnd_toStartOf="@+id/btnWord"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMulaiBelajar" />
 
     <Button
         android:id="@+id/btnWord"
+        style="@style/CustomButtonSecondary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         android:padding="24dp"
         android:text="Kata"
-        style="@style/CustomButtonSecondary"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAlphabet"
@@ -144,6 +144,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvBerita"
         tools:listitem="@layout/news_item" />
+
+    <include
+        android:id="@+id/emptyState"
+        layout="@layout/empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBerita" />
 
     <ProgressBar
         android:id="@+id/progressBar"

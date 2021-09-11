@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.asrul.skripsi.utils.EspressoIdlingResource;
 import com.asrul.skripsi.utils.ResponseState;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +39,7 @@ public class LoginViewModel extends ViewModel {
 
     public void loginWithEmailFlow(String email, String password) {
         isLoading.postValue(true);
+        EspressoIdlingResource.increment();
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -45,6 +47,7 @@ public class LoginViewModel extends ViewModel {
                     } else {
                         loginStatus.postValue(new ResponseState<String>().failure("Login Failed: " + task.getException()));
                     }
+                    EspressoIdlingResource.decrement();
                     isLoading.postValue(false);
                 });
     }
