@@ -8,6 +8,6 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="logout">Logout</string>
     <string name="camera">Camera</string>
-    <string name="greeting">Selemat Pagi, %s!</string>
+    <string name="greeting">Hi, %s!</string>
     <string name="developer_info">Developer Info</string>
 </resources>

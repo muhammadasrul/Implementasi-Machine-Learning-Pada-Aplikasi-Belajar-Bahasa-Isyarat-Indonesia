@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.profile_nav:
                     fragment = new ProfileFragment();
                     break;
+                case R.id.camera_nav:
+                    startActivity(new Intent(this, DetectorActivity.class));
+                    break;
             }
             return loadFragment(fragment);
         });
