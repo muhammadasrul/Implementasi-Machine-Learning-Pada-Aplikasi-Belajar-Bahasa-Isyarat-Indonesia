@@ -9,12 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asrul.skripsi.R;
+import com.asrul.skripsi.data.word.Word;
 
 import java.util.ArrayList;
 
 public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder> {
 
-    private final ArrayList<String> words;
+    private final ArrayList<Word> words;
 
     private OnButtonClicked onButtonClicked;
 
@@ -22,7 +23,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
         this.onButtonClicked = onButtonClicked;
     }
 
-    public WordAdapter(ArrayList<String> word) {
+    public WordAdapter(ArrayList<Word> word) {
         this.words = word;
     }
 
@@ -35,8 +36,8 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
-        String word = words.get(position);
-        holder.btnWord.setText(word);
+        Word word = words.get(position);
+        holder.btnWord.setText(word.getWord());
         holder.btnWord.setOnClickListener(v -> {
             onButtonClicked.onWordClicked(word);
         });
@@ -58,6 +59,6 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
     }
 
     interface OnButtonClicked {
-        void onWordClicked(String word);
+        void onWordClicked(Word word);
     }
 }

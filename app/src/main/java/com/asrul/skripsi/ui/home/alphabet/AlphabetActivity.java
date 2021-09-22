@@ -1,16 +1,14 @@
 package com.asrul.skripsi.ui.home.alphabet;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.asrul.skripsi.R;
+import com.asrul.skripsi.data.Data;
 import com.asrul.skripsi.data.alphabet.Alphabet;
-import com.asrul.skripsi.data.alphabet.AlphabetData;
-import com.asrul.skripsi.ui.home.word.WordResultAdapter;
 
 import java.util.ArrayList;
 
@@ -23,7 +21,7 @@ public class AlphabetActivity extends AppCompatActivity {
 
         RecyclerView rvAlphabet = findViewById(R.id.rvAlphabet);
 
-        ArrayList<Alphabet> alphabetList = new AlphabetData().getAlphabetData();
+        ArrayList<Alphabet> alphabetList = new Data().getAlphabetData();
         AlphabetAdapter adapter = new AlphabetAdapter(alphabetList);
         rvAlphabet.setAdapter(adapter);
         rvAlphabet.setHasFixedSize(true);

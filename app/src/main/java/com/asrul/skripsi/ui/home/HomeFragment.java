@@ -74,6 +74,11 @@ public class HomeFragment extends Fragment {
                         .load(user.getPhotoUrl())
                         .optionalCircleCrop()
                         .into(imgProfile);
+            } else {
+                Glide.with(requireContext())
+                        .load(R.drawable.default_profile)
+                        .optionalCircleCrop()
+                        .into(imgProfile);
             }
         }
 

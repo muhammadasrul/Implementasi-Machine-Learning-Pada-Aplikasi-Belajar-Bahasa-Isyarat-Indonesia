@@ -1,10 +1,12 @@
-package com.asrul.skripsi.data.alphabet;
+package com.asrul.skripsi.data;
 
 import com.asrul.skripsi.R;
+import com.asrul.skripsi.data.alphabet.Alphabet;
+import com.asrul.skripsi.data.word.Word;
 
 import java.util.ArrayList;
 
-public class AlphabetData {
+public class Data {
 
     private final char[] alphabetData = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
     private final int[] signData = new int[]{
@@ -47,5 +49,29 @@ public class AlphabetData {
         }
 
         return alphabetList;
+    }
+
+    private final String[] wordData = new String[]{
+            "Halo",
+            "Terima kasih",
+            "Sama-sama"
+    };
+    private final int[] gestureData = new int[] {
+            R.drawable.halo,
+            R.drawable.terimakasih,
+            R.drawable.samasama
+    };
+
+    public ArrayList<Word> getWord() {
+        ArrayList<Word> wordList = new ArrayList<>();
+
+        for (int i =0; i < wordData.length; i++) {
+            Word word = new Word();
+            word.setWord(wordData.clone()[i]);
+            word.setGesture(gestureData.clone()[i]);
+            wordList.add(word);
+        }
+
+        return wordList;
     }
 }

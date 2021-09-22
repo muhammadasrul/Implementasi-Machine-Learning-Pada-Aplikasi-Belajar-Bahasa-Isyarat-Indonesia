@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.asrul.skripsi.R;
 import com.asrul.skripsi.data.alphabet.Alphabet;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -35,9 +36,19 @@ public class AlphabetAdapter extends RecyclerView.Adapter<AlphabetAdapter.Alphab
     @Override
     public void onBindViewHolder(@NonNull AlphabetAdapter.AlphabetViewModel holder, int position) {
         Alphabet alphabet = alphabetArrayList.get(position);
+        Context context = holder.itemView.getContext();
 
         holder.tvChar.setText(alphabet.getAlphabet().toString());
-        holder.imgSign.setImageResource(alphabet.getSign());
+        if (alphabet.getAlphabet().equals('r') || alphabet.getAlphabet().equals('j') || alphabet.getAlphabet().equals('y')) {
+            Glide.with(context)
+                    .asGif()
+                    .load(alphabet.getSign())
+                    .into(holder.imgSign);
+        } else {
+            Glide.with(context)
+                    .load(alphabet.getSign())
+                    .into(holder.imgSign);
+        }
         holder.itemView.getLayoutParams().width = getScreenWidth(holder.itemView.getContext())/2;
     }
 

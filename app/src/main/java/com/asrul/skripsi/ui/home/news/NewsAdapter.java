@@ -41,7 +41,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         holder.tvNewsTitle.setText(news.getTitle());
         holder.tvNewsDesc.setText(news.getContent());
-        holder.tvNewsWriter.setText(String.format("oleh: %s", news.getWriter()));
+        holder.tvType.setText(news.getType());
+        if (news.getType().equals("news")) {
+            holder.tvType.setBackgroundResource(R.drawable.news_badge);
+        } else {
+            holder.tvType.setBackgroundResource(R.drawable.campaign_badge);
+        }
         Glide.with(context)
                 .load(news.getImgUrl())
                 .into(holder.imgNews);
@@ -60,7 +65,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgNews;
-        TextView tvNewsTitle, tvNewsDesc, tvNewsWriter;
+        TextView tvNewsTitle, tvNewsDesc, tvType;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,7 +73,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             imgNews = itemView.findViewById(R.id.imgNews);
             tvNewsTitle = itemView.findViewById(R.id.tvNewsTitle);
             tvNewsDesc = itemView.findViewById(R.id.tvNewsDesc);
-            tvNewsWriter = itemView.findViewById(R.id.tvNewsWriter);
+            tvType = itemView.findViewById(R.id.tvType);
         }
     }
 }

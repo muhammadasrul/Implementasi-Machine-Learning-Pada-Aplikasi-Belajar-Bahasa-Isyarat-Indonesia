@@ -59,15 +59,17 @@
             android:textSize="12sp"
             android:fontFamily="@font/poppins"
             android:maxLines="3"
-            app:layout_constraintBottom_toTopOf="@id/tvNewsWriter"
+            app:layout_constraintBottom_toTopOf="@id/tvType"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cvImgNews"
             app:layout_constraintTop_toBottomOf="@id/tvNewsTitle"
             tools:text="Berita Kehilangan" />
 
         <TextView
-            android:id="@+id/tvNewsWriter"
-            android:layout_width="0dp"
+            android:id="@+id/tvType"
+            android:layout_width="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
@@ -78,6 +80,6 @@
             android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="@id/cvImgNews"
             app:layout_constraintStart_toEndOf="@id/cvImgNews"
-            tools:text="Oleh Siapa" />
+            tools:text="Campaign" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

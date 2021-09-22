@@ -4,7 +4,7 @@ public class News {
     private String imgUrl;
     private String title;
     private String content;
-    private String writer;
+    private String type;
     private String source;
 
     public String getImgUrl() {
@@ -31,12 +31,12 @@ public class News {
         this.content = content;
     }
 
-    public String getWriter() {
-        return writer;
+    public String getType() {
+        return type;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getSource() {

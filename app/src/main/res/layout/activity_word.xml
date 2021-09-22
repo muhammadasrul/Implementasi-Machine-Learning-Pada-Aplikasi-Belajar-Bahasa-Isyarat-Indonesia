@@ -7,55 +7,46 @@
     android:background="#130F1E"
     tools:context=".ui.home.word.WordActivity">
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/imgSign"-->
-    <!--        android:layout_width="200dp"-->
-    <!--        android:layout_height="200dp"-->
-    <!--        android:src="@drawable/a"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/tvLetter"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvResult"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabBack"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_margin="18dp"
+        android:src="@drawable/ic_arrow_left"
+        app:backgroundTint="@color/color_primary"
+        app:tint="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imgWord"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:background="#734B98"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/word_result_item" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/tvLetter"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:textColor="@android:color/white"-->
-    <!--        android:textSize="24sp"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/rvCategory"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/imgSign"-->
-    <!--        tools:text="A" />-->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCategory"
+    <TextView
+        android:id="@+id/tvCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/rvWord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rvWord"
+        android:textAlignment="center"
+        android:text="Kata Sehari-hari"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal"

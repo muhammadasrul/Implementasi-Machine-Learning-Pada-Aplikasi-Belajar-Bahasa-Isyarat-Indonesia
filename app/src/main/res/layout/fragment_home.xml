@@ -11,7 +11,7 @@
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_margin="24dp"
-        android:src="@drawable/ic_default_profile"
+        tools:src="@drawable/default_profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,6 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins"
         android:text="Mulai Belajar"
         android:textColor="@color/color_primary"
